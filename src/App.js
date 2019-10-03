@@ -4,6 +4,35 @@ import './App.css';
 var Tesseract = window.Tesseract;
 
 class App extends Component {
+
+  constructor(props){
+    super(props);
+    this.state={
+      uploads:[],
+      patterns:[],
+      document:[]
+    };
+  }
+
+  handleChange = (event) =>{
+    if(event.target.files[9]){
+      var uploads = [];
+        for(var key in event.target.files){
+          if(!event.target.files.hasOwnProperty(key)) continue;
+          let upload = event.target.files[key];
+          uploads.push(URL.createObjectURL(upload));
+        }
+
+        this.setState({
+          uploads : uploads
+        });
+    }else{
+      this.setState({
+        uploads : []
+      });
+    }
+  }
+
   render() {
     return (
       <div className="app">
